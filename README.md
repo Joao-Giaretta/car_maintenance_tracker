@@ -77,7 +77,7 @@ cp .env.example .env
 
 2. Edite o arquivo `.env` e adicione sua string de conexão do MongoDB:
 ```env
-MONGODB_CONNECTION_STRING=mongodb+srv://usuario:senha@cluster.mongodb.net/CarMaintenance
+MONGODB_CONNECTION_STRING=mongodb+srv://usuario:senha@cluster.mongodb.net/
 DATABASE_NAME=CarMaintenance
 ```
 
