@@ -4,7 +4,36 @@ import 'screens/splash_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await dotenv.load(fileName: ".env");
+  try {
+    // Tenta carregar o .env de diferentes formas para garantir compatibilidade
+    try {
+      await dotenv.load(fileName: ".env");
+    } catch (e) {
+      // Fallback: tenta carregar sem o ponto
+      try {
+        await dotenv.load(fileName: "env");
+      } catch (e2) {
+        print('❌ Error loading .env file: $e');
+        print('❌ Error loading env file: $e2');
+        rethrow;
+      }
+    }
+    // Debug: verificar se as variáveis foram carregadas
+    print('✅ .env file loaded successfully');
+    final connStr = dotenv.env['MONGODB_CONNECTION_STRING'];
+    final dbName = dotenv.env['DATABASE_NAME'];
+    print('MONGODB_CONNECTION_STRING: ${connStr != null && connStr.length > 20 ? connStr.substring(0, 20) : "null"}...');
+    print('DATABASE_NAME: $dbName');
+    
+    // Validação crítica: se as variáveis não foram carregadas, o app não pode funcionar
+    if (connStr == null || connStr.isEmpty) {
+      throw Exception('MONGODB_CONNECTION_STRING is missing from .env file');
+    }
+  } catch (e) {
+    print('❌ Critical error loading .env file: $e');
+    // Em produção, você pode querer usar valores padrão ou mostrar um erro ao usuário
+    rethrow;
+  }
   runApp(const MyApp());
 }
 

@@ -19,7 +19,12 @@ class DatabaseService {
     final baseConnectionString = dotenv.env['MONGODB_CONNECTION_STRING'];
     final databaseName = dotenv.env['DATABASE_NAME'];
 
+    print('🔌 Attempting to connect to MongoDB...');
+    print('Base connection string: ${baseConnectionString?.substring(0, baseConnectionString.length > 30 ? 30 : baseConnectionString.length)}...');
+    print('Database name: $databaseName');
+
     if (baseConnectionString == null || baseConnectionString.isEmpty) {
+      print('❌ MONGODB_CONNECTION_STRING is null or empty');
       throw Exception(
         'Environment variable MONGODB_CONNECTION_STRING is not configured. '
         'Create the .env file (based on .env.example) and define the base MongoDB connection string.',
@@ -44,11 +49,19 @@ class DatabaseService {
       }
     }
 
-    _db = await Db.create(finalConnectionString);
-    await _db!.open();
-    _maintenanceCollection = _db!.collection('maintenance_records');
-    _carsCollection = _db!.collection('cars');
-    _isConnected = true;
+    try {
+      _db = await Db.create(finalConnectionString);
+      print('📦 Database object created, opening connection...');
+      await _db!.open();
+      print('✅ Successfully connected to MongoDB!');
+      _maintenanceCollection = _db!.collection('maintenance_records');
+      _carsCollection = _db!.collection('cars');
+      _isConnected = true;
+    } catch (e) {
+      print('❌ Error connecting to MongoDB: $e');
+      print('Connection string used: ${finalConnectionString.substring(0, finalConnectionString.length > 50 ? 50 : finalConnectionString.length)}...');
+      rethrow;
+    }
   }
 
   Future<void> disconnect() async {
