@@ -1,180 +1,180 @@
 # 🚗 Car Maintenance Tracker
 
-Aplicativo Flutter para gerenciamento de manutenção de veículos, permitindo cadastrar múltiplos carros e acompanhar todo o histórico de manutenções, custos e estatísticas.
+Flutter application for managing vehicle maintenance, allowing you to register multiple cars and track the full history of services, costs, and statistics.
 
-## 📱 Funcionalidades
+## 📱 Features
 
-### Gerenciamento de Carros
-- ✅ Cadastro de múltiplos carros com apelido, fabricante, modelo e ano
-- ✅ Edição e exclusão de carros
-- ✅ Seleção de imagem do carro (galeria ou câmera)
-- ✅ Lista de todos os carros cadastrados
+### Car Management
+- ✅ Register multiple cars with nickname, manufacturer, model, and year
+- ✅ Edit and delete cars
+- ✅ Select car image (gallery or camera)
+- ✅ List all registered cars
 
-### Controle de Manutenções
-- ✅ Cadastro completo de manutenções com:
-  - Data da manutenção
-  - Título da manutenção
-  - Descrição do problema
-  - Peças substituídas
-  - Custo total
-  - Nome do mecânico
-  - Quilometragem do veículo
-  - Notas adicionais
-- ✅ Edição e exclusão de manutenções
-- ✅ Visualização detalhada de cada manutenção
-- ✅ Histórico paginado de manutenções (5 por vez com botão "Carregar mais")
+### Maintenance Management
+- ✅ Full maintenance registration with:
+  - Maintenance date
+  - Maintenance title
+  - Problem description
+  - Replaced parts
+  - Total cost
+  - Mechanic name
+  - Vehicle mileage
+  - Additional notes
+- ✅ Edit and delete maintenances
+- ✅ Detailed view of each maintenance
+- ✅ Paginated maintenance history (5 at a time with a "Load more" button)
 
-### Estatísticas e Relatórios
-- ✅ Dias desde a última manutenção
-- ✅ Total gasto em manutenções
-- ✅ Quantidade total de manutenções realizadas
-- ✅ Contador de registros no histórico
+### Statistics and Reports
+- ✅ Days since last maintenance
+- ✅ Total amount spent on maintenance
+- ✅ Total number of maintenances performed
+- ✅ Record counter in the history
 
 ### Interface
-- ✅ Splash screen animada
-- ✅ Design moderno e responsivo
-- ✅ Navegação intuitiva
+- ✅ Animated splash screen
+- ✅ Modern and responsive design
+- ✅ Intuitive navigation
 
-## 🛠️ Tecnologias Utilizadas
+## 🛠️ Technologies Used
 
-- **Flutter** - Framework multiplataforma
-- **MongoDB** - Banco de dados NoSQL na nuvem
-- **mongo_dart** - Driver MongoDB para Dart
-- **flutter_dotenv** - Gerenciamento de variáveis de ambiente
-- **image_picker** - Seleção de imagens (galeria/câmera)
-- **shared_preferences** - Armazenamento local de preferências
-- **intl** - Internacionalização e formatação de datas
-- **path_provider** - Acesso a diretórios do dispositivo
+- **Flutter** – Cross-platform framework
+- **MongoDB** – Cloud NoSQL database
+- **mongo_dart** – MongoDB driver for Dart
+- **flutter_dotenv** – Environment variables management
+- **image_picker** – Image selection (gallery/camera)
+- **shared_preferences** – Local preferences storage
+- **intl** – Internationalization and date/number formatting
+- **path_provider** – Access to device directories
 
-## 📋 Pré-requisitos
+## 📋 Prerequisites
 
-- Flutter SDK (versão 3.5.4 ou superior)
+- Flutter SDK (version 3.5.4 or higher)
 - Dart SDK
-- Conta MongoDB Atlas (ou servidor MongoDB próprio)
-- Xcode (para iOS) ou Android Studio (para Android)
+- MongoDB Atlas account (or your own MongoDB server)
+- Xcode (for iOS) or Android Studio (for Android)
 
-## 🚀 Como Configurar
+## 🚀 How to Set Up
 
-### 1. Clone o repositório
+### 1. Clone the repository
 
 ```bash
-git clone <url-do-repositorio>
+git clone <repository-url>
 cd car_maintenance_tracker
 ```
 
-### 2. Instale as dependências
+### 2. Install dependencies
 
 ```bash
 flutter pub get
 ```
 
-### 3. Configure as variáveis de ambiente
+### 3. Configure environment variables
 
-1. Copie o arquivo `.env.example` para `.env`:
+1. Copy the `.env.example` file to `.env`:
 ```bash
 cp .env.example .env
 ```
 
-2. Edite o arquivo `.env` e adicione sua string de conexão do MongoDB:
+2. Edit the `.env` file and add your MongoDB connection string:
 ```env
-MONGODB_CONNECTION_STRING=mongodb+srv://usuario:senha@cluster.mongodb.net/
+MONGODB_CONNECTION_STRING=mongodb+srv://user:password@cluster.mongodb.net/
 DATABASE_NAME=CarMaintenance
 ```
 
-**⚠️ Importante**: O arquivo `.env` contém informações sensíveis e não deve ser commitado no Git. Ele já está configurado no `.gitignore`.
+**⚠️ Important**: The `.env` file contains sensitive information and must not be committed to Git. It is already configured in `.gitignore`.
 
-### 4. Execute o aplicativo
+### 4. Run the application
 
 ```bash
-# Para iOS
+# iOS
 flutter run
 
-# Para Android
+# Android
 flutter run
 
-# Para um dispositivo específico
+# Specific device
 flutter devices
 flutter run -d <device-id>
 ```
 
-## 📁 Estrutura do Projeto
+## 📁 Project Structure
 
 ```
 lib/
-├── main.dart                 # Ponto de entrada da aplicação
+├── main.dart                          # Application entrypoint
 ├── models/
-│   ├── car_model.dart        # Modelo de dados do carro
-│   └── maintenance_model.dart # Modelo de dados da manutenção
+│   ├── car_model.dart                 # Car data model
+│   └── maintenance_model.dart         # Maintenance data model
 ├── screens/
-│   ├── splash_screen.dart     # Tela de splash
-│   ├── cars_list_screen.dart  # Lista de carros
-│   ├── add_car_screen.dart    # Adicionar/editar carro
-│   ├── home_screen.dart       # Tela principal com estatísticas
-│   ├── add_maintenance_screen.dart # Adicionar/editar manutenção
-│   └── maintenance_detail_screen.dart # Detalhes da manutenção
+│   ├── splash_screen.dart             # Splash screen
+│   ├── cars_list_screen.dart          # Cars list
+│   ├── add_car_screen.dart            # Add/edit car
+│   ├── home_screen.dart               # Main screen with statistics
+│   ├── add_maintenance_screen.dart    # Add/edit maintenance
+│   └── maintenance_detail_screen.dart # Maintenance details
 └── services/
-    └── database_service.dart  # Serviço de conexão com MongoDB
+    └── database_service.dart          # MongoDB connection service
 ```
 
-## 🎨 Características da Interface
+## 🎨 UI Characteristics
 
-- **Cards Informativos**: Estatísticas exibidas em cards visuais
-- **Paginação**: Histórico de manutenções com carregamento progressivo
-- **Imagens Circulares**: Fotos dos carros exibidas em formato circular
-- **Animações**: Splash screen com animações suaves
-- **Floating Action Buttons**: Botões flutuantes para ações principais
+- **Info Cards**: Statistics displayed in visual cards
+- **Pagination**: Maintenance history with progressive loading
+- **Circular Images**: Car photos shown in circular shape
+- **Animations**: Smooth animations on the splash screen
+- **Floating Action Buttons**: FABs for main actions
 
-## 🔒 Segurança
+## 🔒 Security
 
-- Credenciais do banco de dados armazenadas em arquivo `.env` (não versionado)
-- Validação de dados em formulários
-- Tratamento de erros em operações de banco de dados
+- Database credentials stored in a `.env` file (not versioned)
+- Form data validation
+- Error handling for database operations
 
-## 📝 Modelos de Dados
+## 📝 Data Models
 
-### Car (Carro)
-- `id`: Identificador único
-- `nickname`: Apelido do carro
-- `manufacturer`: Fabricante
-- `model`: Modelo
-- `year`: Ano
+### Car
+- `id`: Unique identifier
+- `nickname`: Car nickname
+- `manufacturer`: Manufacturer
+- `model`: Model
+- `year`: Year
 
-### MaintenanceRecord (Registro de Manutenção)
-- `id`: Identificador único
-- `carId`: ID do carro vinculado
-- `serviceDate`: Data da manutenção
-- `title`: Título da manutenção
-- `problemDescription`: Descrição do problema
-- `replacedParts`: Lista de peças substituídas
-- `cost`: Custo total
-- `mechanicName`: Nome do mecânico
-- `notes`: Notas adicionais
-- `km`: Quilometragem do veículo
+### MaintenanceRecord
+- `id`: Unique identifier
+- `carId`: Linked car ID
+- `serviceDate`: Maintenance date
+- `title`: Maintenance title
+- `problemDescription`: Problem description
+- `replacedParts`: List of replaced parts
+- `cost`: Total cost
+- `mechanicName`: Mechanic name
+- `notes`: Additional notes
+- `km`: Vehicle mileage
 
-## 🐛 Solução de Problemas
+## 🐛 Troubleshooting
 
-### Erro ao carregar .env
-- Certifique-se de que o arquivo `.env` está na raiz do projeto
-- Execute `flutter clean` e `flutter pub get`
-- Faça um rebuild completo do app (não apenas hot reload)
+### Error loading .env
+- Make sure the `.env` file is in the project root
+- Run `flutter clean` and `flutter pub get`
+- Do a full rebuild of the app (not just hot reload)
 
-### Erro de conexão com MongoDB
-- Verifique se a string de conexão no `.env` está correta
-- Confirme que o IP está liberado no MongoDB Atlas (Network Access)
-- Verifique as credenciais de usuário e senha
+### MongoDB connection error
+- Check if the connection string in `.env` is correct
+- Confirm that the IP is allowed in MongoDB Atlas (Network Access)
+- Check user credentials and password
 
-### Erro ao selecionar imagem
-- Verifique as permissões de câmera e galeria no dispositivo
-- No iOS, verifique o `Info.plist` para permissões de câmera
+### Error selecting image
+- Check camera and gallery permissions on the device
+- On iOS, check `Info.plist` for camera permissions
 
-## 📄 Licença
+## 📄 License
 
-Este projeto é privado e de uso pessoal.
+This project is private and for personal use.
 
-## 👨‍💻 Desenvolvido por
+## 👨‍💻 Developed by
 
-Car Maintenance Tracker - Sistema de gerenciamento de manutenção de veículos
+Car Maintenance Tracker – Vehicle maintenance management system
 
 ---
 
-**Versão**: 1.0.0+1
+**Version**: 1.0.0+1
