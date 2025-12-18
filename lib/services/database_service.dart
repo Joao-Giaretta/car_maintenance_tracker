@@ -21,8 +21,8 @@ class DatabaseService {
 
     if (baseConnectionString == null || baseConnectionString.isEmpty) {
       throw Exception(
-        'Variável de ambiente MONGODB_CONNECTION_STRING não configurada. '
-        'Crie o arquivo .env (baseado em .env.example) e defina a string de conexão base do MongoDB.',
+        'Environment variable MONGODB_CONNECTION_STRING is not configured. '
+        'Create the .env file (based on .env.example) and define the base MongoDB connection string.',
       );
     }
 
@@ -86,7 +86,7 @@ class DatabaseService {
   Future<void> updateMaintenanceRecord(MaintenanceRecord record) async {
     await connect();
     if (record.id == null || record.id!.isEmpty) {
-      throw Exception('ID da manutenção não pode ser nulo ou vazio');
+      throw Exception('Maintenance ID cannot be null or empty');
     }
     // Garante que o ID seja uma string válida
     final idString = record.id is String ? record.id! : record.id!.toString();
@@ -129,7 +129,7 @@ class DatabaseService {
   Future<void> updateCar(Car car) async {
     await connect();
     if (car.id == null || car.id!.isEmpty) {
-      throw Exception('ID do carro não pode ser nulo ou vazio');
+      throw Exception('Car ID cannot be null or empty');
     }
     final idString = car.id is String ? car.id! : car.id!.toString();
     await _carsCollection!.update(

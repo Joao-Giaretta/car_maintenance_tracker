@@ -42,16 +42,16 @@ class _CarsListScreenState extends State<CarsListScreen> {
     final confirm = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Confirmar exclusão'),
-        content: Text('Deseja realmente excluir o carro "${car.nickname}"?'),
+        title: const Text('Confirm deletion'),
+        content: Text('Do you really want to delete the car "${car.nickname}"?'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('Cancelar'),
+            child: const Text('Cancel'),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
-            child: const Text('Excluir', style: TextStyle(color: Colors.red)),
+            child: const Text('Delete', style: TextStyle(color: Colors.red)),
           ),
         ],
       ),
@@ -62,7 +62,7 @@ class _CarsListScreenState extends State<CarsListScreen> {
       await _loadCars();
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Carro excluído com sucesso')),
+          const SnackBar(content: Text('Car deleted successfully')),
         );
       }
     }
@@ -72,7 +72,7 @@ class _CarsListScreenState extends State<CarsListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Meus Carros'),
+        title: const Text('My Cars'),
       ),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
@@ -84,12 +84,12 @@ class _CarsListScreenState extends State<CarsListScreen> {
                       Icon(Icons.directions_car, size: 80, color: Colors.grey),
                       SizedBox(height: 16),
                       Text(
-                        'Nenhum carro cadastrado',
+                        'No cars registered',
                         style: TextStyle(fontSize: 18, color: Colors.grey),
                       ),
                       SizedBox(height: 8),
                       Text(
-                        'Toque no botão + para adicionar um carro',
+                        'Tap the + button to add a car',
                         style: TextStyle(fontSize: 14, color: Colors.grey),
                       ),
                     ],
@@ -123,7 +123,7 @@ class _CarsListScreenState extends State<CarsListScreen> {
                                 children: [
                                   Icon(Icons.edit, size: 20),
                                   SizedBox(width: 8),
-                                  Text('Editar'),
+                                  Text('Edit'),
                                 ],
                               ),
                             ),
@@ -133,7 +133,7 @@ class _CarsListScreenState extends State<CarsListScreen> {
                                 children: [
                                   Icon(Icons.delete, size: 20, color: Colors.red),
                                   SizedBox(width: 8),
-                                  Text('Excluir', style: TextStyle(color: Colors.red)),
+                                  Text('Delete', style: TextStyle(color: Colors.red)),
                                 ],
                               ),
                             ),

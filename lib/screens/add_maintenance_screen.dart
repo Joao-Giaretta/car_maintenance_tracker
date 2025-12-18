@@ -106,14 +106,14 @@ class _AddMaintenanceScreenState extends State<AddMaintenanceScreen> {
     if (_formKey.currentState!.validate()) {
       if (_selectedDate == null) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Por favor, selecione uma data')),
+          const SnackBar(content: Text('Please select a date')),
         );
         return;
       }
 
       if (_replacedParts.isEmpty) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Por favor, adicione pelo menos uma peça substituída')),
+          const SnackBar(content: Text('Please add at least one replaced part')),
         );
         return;
       }
@@ -145,7 +145,7 @@ class _AddMaintenanceScreenState extends State<AddMaintenanceScreen> {
           await _dbService.addMaintenanceRecord(maintenance);
           if (mounted) {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Manutenção adicionada com sucesso!')),
+              const SnackBar(content: Text('Maintenance added successfully!')),
             );
           }
         } else {
@@ -153,7 +153,7 @@ class _AddMaintenanceScreenState extends State<AddMaintenanceScreen> {
           await _dbService.updateMaintenanceRecord(maintenance);
           if (mounted) {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Manutenção atualizada com sucesso!')),
+              const SnackBar(content: Text('Maintenance updated successfully!')),
             );
           }
         }
@@ -163,9 +163,9 @@ class _AddMaintenanceScreenState extends State<AddMaintenanceScreen> {
         }
       } catch (e) {
         if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Erro ao salvar: $e')),
-          );
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text('Error while saving: $e')),
+            );
         }
       } finally {
         if (mounted) {
@@ -205,8 +205,8 @@ class _AddMaintenanceScreenState extends State<AddMaintenanceScreen> {
                   Expanded(
                     child: Text(
                       widget.maintenance == null 
-                          ? 'Adicionar Manutenção' 
-                          : 'Editar Manutenção',
+                          ? 'Add Maintenance' 
+                          : 'Edit Maintenance',
                       style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -236,14 +236,14 @@ class _AddMaintenanceScreenState extends State<AddMaintenanceScreen> {
                           onTap: () => _selectDate(builderContext),
                           child: InputDecorator(
                             decoration: const InputDecoration(
-                              labelText: 'Data da Manutenção *',
+                              labelText: 'Maintenance Date *',
                               border: OutlineInputBorder(),
                               prefixIcon: Icon(Icons.calendar_today),
                             ),
                             child: Text(
                               _selectedDate != null
-                                  ? DateFormat('dd/MM/yyyy').format(_selectedDate!)
-                                  : 'Selecione uma data',
+                                  ? DateFormat('yyyy-MM-dd').format(_selectedDate!)
+                                  : 'Select a date',
                               style: TextStyle(
                                 color: _selectedDate != null 
                                     ? Colors.black 
@@ -258,8 +258,8 @@ class _AddMaintenanceScreenState extends State<AddMaintenanceScreen> {
                       TextFormField(
                         controller: _titleController,
                         decoration: const InputDecoration(
-                          labelText: 'Título da Manutenção',
-                          hintText: 'Ex: Troca de óleo, Revisão geral',
+                          labelText: 'Maintenance Title',
+                          hintText: 'E.g.: Oil change, General inspection',
                           border: OutlineInputBorder(),
                           prefixIcon: Icon(Icons.title),
                         ),
@@ -269,15 +269,15 @@ class _AddMaintenanceScreenState extends State<AddMaintenanceScreen> {
                       TextFormField(
                         controller: _problemDescriptionController,
                         decoration: const InputDecoration(
-                          labelText: 'Descrição do Problema *',
-                          hintText: 'Descreva o problema ou serviço realizado',
+                          labelText: 'Problem Description *',
+                          hintText: 'Describe the problem or service performed',
                           border: OutlineInputBorder(),
                           prefixIcon: Icon(Icons.description),
                         ),
                         maxLines: 3,
                         validator: (value) {
                           if (value == null || value.trim().isEmpty) {
-                            return 'Por favor, descreva o problema';
+                            return 'Please describe the problem';
                           }
                           return null;
                         },
@@ -287,7 +287,7 @@ class _AddMaintenanceScreenState extends State<AddMaintenanceScreen> {
                       TextFormField(
                         controller: _costController,
                         decoration: const InputDecoration(
-                          labelText: 'Custo (R\$) *',
+                          labelText: 'Cost (\$) *',
                           hintText: '0.00',
                           border: OutlineInputBorder(),
                           prefixIcon: Icon(Icons.attach_money),
@@ -295,11 +295,11 @@ class _AddMaintenanceScreenState extends State<AddMaintenanceScreen> {
                         keyboardType: const TextInputType.numberWithOptions(decimal: true),
                         validator: (value) {
                           if (value == null || value.trim().isEmpty) {
-                            return 'Por favor, insira o custo';
+                            return 'Please enter the cost';
                           }
                           final cost = double.tryParse(value.trim().replaceAll(',', '.'));
                           if (cost == null || cost < 0) {
-                            return 'Por favor, insira um valor válido';
+                            return 'Please enter a valid value';
                           }
                           return null;
                         },
@@ -309,8 +309,8 @@ class _AddMaintenanceScreenState extends State<AddMaintenanceScreen> {
                       TextFormField(
                         controller: _kmController,
                         decoration: const InputDecoration(
-                          labelText: 'Quilometragem (km)',
-                          hintText: 'Ex: 50000',
+                          labelText: 'Mileage (km)',
+                          hintText: 'E.g.: 50000',
                           border: OutlineInputBorder(),
                           prefixIcon: Icon(Icons.speed),
                         ),
@@ -319,7 +319,7 @@ class _AddMaintenanceScreenState extends State<AddMaintenanceScreen> {
                           if (value != null && value.trim().isNotEmpty) {
                             final km = double.tryParse(value.trim().replaceAll(',', '.'));
                             if (km == null || km < 0) {
-                              return 'Por favor, insira um valor válido';
+                              return 'Please enter a valid value';
                             }
                           }
                           return null;
@@ -330,14 +330,14 @@ class _AddMaintenanceScreenState extends State<AddMaintenanceScreen> {
                       TextFormField(
                         controller: _mechanicNameController,
                         decoration: const InputDecoration(
-                          labelText: 'Nome do Mecânico/Oficina *',
-                          hintText: 'Ex: João Silva, Oficina XYZ',
+                          labelText: 'Mechanic/Shop Name *',
+                          hintText: 'E.g.: John Smith, XYZ Workshop',
                           border: OutlineInputBorder(),
                           prefixIcon: Icon(Icons.person),
                         ),
                         validator: (value) {
                           if (value == null || value.trim().isEmpty) {
-                            return 'Por favor, insira o nome do mecânico';
+                            return 'Please enter the mechanic name';
                           }
                           return null;
                         },
@@ -345,7 +345,7 @@ class _AddMaintenanceScreenState extends State<AddMaintenanceScreen> {
                       const SizedBox(height: 16),
                       // Peças substituídas
                       Text(
-                        'Peças Substituídas *',
+                        'Replaced Parts *',
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -359,7 +359,7 @@ class _AddMaintenanceScreenState extends State<AddMaintenanceScreen> {
                             child: TextFormField(
                               controller: _replacedPartController,
                               decoration: const InputDecoration(
-                                hintText: 'Digite o nome da peça',
+                                hintText: 'Type the part name',
                                 border: OutlineInputBorder(),
                               ),
                               onFieldSubmitted: (_) => _addReplacedPart(),
@@ -377,7 +377,7 @@ class _AddMaintenanceScreenState extends State<AddMaintenanceScreen> {
                         Padding(
                           padding: const EdgeInsets.only(top: 8),
                           child: Text(
-                            'Nenhuma peça adicionada',
+                            'No parts added',
                             style: TextStyle(
                               fontSize: 12,
                               color: Colors.grey[600],
@@ -403,8 +403,8 @@ class _AddMaintenanceScreenState extends State<AddMaintenanceScreen> {
                       TextFormField(
                         controller: _notesController,
                         decoration: const InputDecoration(
-                          labelText: 'Observações',
-                          hintText: 'Observações adicionais (opcional)',
+                          labelText: 'Notes',
+                          hintText: 'Additional notes (optional)',
                           border: OutlineInputBorder(),
                           prefixIcon: Icon(Icons.note),
                         ),
@@ -419,7 +419,7 @@ class _AddMaintenanceScreenState extends State<AddMaintenanceScreen> {
                               onPressed: _isLoading 
                                   ? null 
                                   : () => Navigator.pop(context),
-                              child: const Text('Cancelar'),
+                              child: const Text('Cancel'),
                             ),
                           ),
                           const SizedBox(width: 12),
@@ -435,7 +435,7 @@ class _AddMaintenanceScreenState extends State<AddMaintenanceScreen> {
                                         color: Colors.white,
                                       ),
                                     )
-                                  : const Text('Salvar'),
+                                  : const Text('Save'),
                             ),
                           ),
                         ],

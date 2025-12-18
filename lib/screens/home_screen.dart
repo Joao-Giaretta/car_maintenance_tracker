@@ -135,7 +135,7 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               ListTile(
                 leading: const Icon(Icons.photo_library),
-                title: const Text('Escolher da Galeria'),
+                title: const Text('Choose from Gallery'),
                 onTap: () {
                   Navigator.pop(context);
                   _pickImage(ImageSource.gallery);
@@ -143,7 +143,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               ListTile(
                 leading: const Icon(Icons.photo_camera),
-                title: const Text('Tirar Foto'),
+                title: const Text('Take Picture'),
                 onTap: () {
                   Navigator.pop(context);
                   _pickImage(ImageSource.camera);
@@ -171,7 +171,7 @@ class _HomeScreenState extends State<HomeScreen> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Erro ao selecionar imagem: $e')),
+          SnackBar(content: Text('Error selecting image: $e')),
         );
       }
     }
@@ -213,7 +213,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   CircularProgressIndicator(),
                   SizedBox(height: 16),
                   Text(
-                    'Carregando informações...',
+                    'Loading information...',
                     style: TextStyle(
                       fontSize: 16,
                       color: Colors.grey,
@@ -255,7 +255,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               const Icon(Icons.directions_car, size: 60, color: Colors.grey),
                               const SizedBox(height: 8),
                               Text(
-                                'Toque para adicionar foto',
+                                'Tap to add photo',
                                 style: TextStyle(
                                   fontSize: 12,
                                   color: Colors.grey[400],
@@ -288,7 +288,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Column(
                     children: [
                       Text(
-                        'Dias desde a última manutenção',
+                        'Days since last maintenance',
                         style: TextStyle(
                           fontSize: 14,
                           color: Colors.grey[400],
@@ -310,7 +310,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         Divider(color: Colors.grey[700]),
                         const SizedBox(height: 8),
                         Text(
-                          'Última Manutenção',
+                          'Last Maintenance',
                           style: TextStyle(
                             fontSize: 12,
                             color: Colors.grey[400],
@@ -319,7 +319,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         const SizedBox(height: 6),
                         Text(
-                          DateFormat('dd/MM/yyyy').format(_lastMaintenance!.serviceDate!),
+                          DateFormat('yyyy-MM-dd').format(_lastMaintenance!.serviceDate!),
                           style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w500,
@@ -369,7 +369,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 const SizedBox(width: 6),
                                 Flexible(
                                   child: Text(
-                                    'Total Gasto',
+                                    'Total Spent',
                                     style: TextStyle(
                                       fontSize: 12,
                                       color: Colors.grey[400],
@@ -382,7 +382,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                             const SizedBox(height: 8),
                             Text(
-                              NumberFormat.currency(locale: 'pt_BR', symbol: 'R\$').format(_totalSpent),
+                              NumberFormat.currency(locale: 'en_US', symbol: '\$').format(_totalSpent),
                               style: const TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
@@ -419,7 +419,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 const SizedBox(width: 6),
                                 Flexible(
                                   child: Text(
-                                    'Manutenções',
+                                    'Maintenances',
                                     style: TextStyle(
                                       fontSize: 12,
                                       color: Colors.grey[400],
@@ -460,14 +460,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
-                        'Histórico',
+                        'History',
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       Text(
-                        '$_maintenanceCount registros',
+                        '$_maintenanceCount records',
                         style: TextStyle(
                           fontSize: 14,
                           color: Colors.grey[400],
@@ -482,7 +482,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       padding: const EdgeInsets.all(32.0),
                       child: Center(
                         child: Text(
-                          'Nenhuma manutenção registrada',
+                          'No maintenance records',
                           style: TextStyle(
                             fontSize: 16,
                             color: Colors.grey[400],
@@ -529,7 +529,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       const SizedBox(width: 12),
                                       Expanded(
                                         child: Text(
-                                          maintenance.title ?? 'Manutenção',
+                                          maintenance.title ?? 'Maintenance',
                                           style: const TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.bold,
@@ -539,8 +539,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                       if (maintenance.cost != null)
                                         Text(
                                           NumberFormat.currency(
-                                            locale: 'pt_BR',
-                                            symbol: 'R\$',
+                                            locale: 'en_US',
+                                            symbol: '\$',
                                           ).format(maintenance.cost),
                                           style: const TextStyle(
                                             fontSize: 16,
@@ -561,7 +561,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         ),
                                         const SizedBox(width: 4),
                                         Text(
-                                          DateFormat('dd/MM/yyyy')
+                                          DateFormat('yyyy-MM-dd')
                                               .format(maintenance.serviceDate!),
                                           style: TextStyle(
                                             fontSize: 14,
@@ -605,7 +605,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   width: 20,
                                   child: CircularProgressIndicator(strokeWidth: 2),
                                 )
-                              : const Text('Carregar mais'),
+                              : const Text('Load more'),
                         ),
                       ),
                     ),

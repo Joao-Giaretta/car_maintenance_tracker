@@ -16,16 +16,16 @@ class MaintenanceDetailScreen extends StatelessWidget {
     final confirm = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Confirmar exclusão'),
-        content: const Text('Deseja realmente excluir esta manutenção?'),
+        title: const Text('Confirm deletion'),
+        content: const Text('Do you really want to cancel this maintenance?'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('Cancelar'),
+            child: const Text('Cancel'),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
-            child: const Text('Excluir', style: TextStyle(color: Colors.red)),
+            child: const Text('Delete', style: TextStyle(color: Colors.red)),
           ),
         ],
       ),
@@ -36,7 +36,7 @@ class MaintenanceDetailScreen extends StatelessWidget {
       if (context.mounted) {
         Navigator.pop(context, true);
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Manutenção excluída com sucesso')),
+          const SnackBar(content: Text('Maintenance deleted successfully')),
         );
       }
     }
@@ -57,24 +57,24 @@ class MaintenanceDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final dbService = DatabaseService();
     final NumberFormat currencyFormat = NumberFormat.currency(
-      locale: 'pt_BR',
-      symbol: 'R\$',
+      locale: 'en_US',
+      symbol: '\$',
     );
     final NumberFormat numberFormat = NumberFormat('#,###');
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Detalhes da Manutenção'),
+        title: const Text('Maintenance Details'),
         actions: [
           IconButton(
             icon: const Icon(Icons.edit),
             onPressed: () => _editMaintenance(context),
-            tooltip: 'Editar',
+            tooltip: 'Edit',
           ),
           IconButton(
             icon: const Icon(Icons.delete),
             onPressed: () => _deleteMaintenance(context, dbService),
-            tooltip: 'Excluir',
+            tooltip: 'Delete',
             color: Colors.red,
           ),
         ],
@@ -105,7 +105,7 @@ class MaintenanceDetailScreen extends StatelessWidget {
                         const SizedBox(width: 12),
                         Expanded(
                           child: Text(
-                            maintenance.title ?? 'Manutenção',
+                            maintenance.title ?? 'Maintenance',
                             style: const TextStyle(
                               fontSize: 24,
                               fontWeight: FontWeight.bold,
@@ -140,7 +140,7 @@ class MaintenanceDetailScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
-                      'Informações Principais',
+                      'Main Information',
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -149,24 +149,24 @@ class MaintenanceDetailScreen extends StatelessWidget {
                     const SizedBox(height: 16),
                     _buildInfoRow(
                       Icons.calendar_today,
-                      'Data',
+                      'Date',
                       maintenance.serviceDate != null
-                          ? DateFormat('dd/MM/yyyy').format(maintenance.serviceDate!)
-                          : 'Não informado',
+                          ? DateFormat('yyyy-MM-dd').format(maintenance.serviceDate!)
+                          : 'Not provided',
                     ),
                     if (maintenance.km != null) ...[
                       const SizedBox(height: 12),
                       _buildInfoRow(
                         Icons.speed,
-                        'Quilometragem',
+                        'Mileage',
                         '${numberFormat.format(maintenance.km!.toInt())} km',
                       ),
                     ],
                     const SizedBox(height: 12),
                     _buildInfoRow(
                       Icons.person,
-                      'Mecânico/Oficina',
-                      maintenance.mechanicName ?? 'Não informado',
+                      'Mechanic/Shop',
+                      maintenance.mechanicName ?? 'Not provided',
                     ),
                   ],
                 ),
@@ -191,7 +191,7 @@ class MaintenanceDetailScreen extends StatelessWidget {
                           Icon(Icons.description, color: Colors.blue),
                           SizedBox(width: 8),
                           Text(
-                            'Descrição do Problema',
+                            'Problem Description',
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
@@ -226,7 +226,7 @@ class MaintenanceDetailScreen extends StatelessWidget {
                           Icon(Icons.build_circle, color: Colors.blue[400]),
                           const SizedBox(width: 8),
                           const Text(
-                            'Peças Substituídas',
+                            'Replaced Parts',
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
@@ -268,7 +268,7 @@ class MaintenanceDetailScreen extends StatelessWidget {
                           Icon(Icons.note, color: Colors.grey),
                           SizedBox(width: 8),
                           Text(
-                            'Observações',
+                            'Notes',
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,

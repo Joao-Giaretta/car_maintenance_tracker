@@ -61,14 +61,14 @@ class _AddCarScreenState extends State<AddCarScreen> {
           await _dbService.addCar(car);
           if (mounted) {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Carro adicionado com sucesso!')),
+              const SnackBar(content: Text('Car added successfully!')),
             );
           }
         } else {
           await _dbService.updateCar(car);
           if (mounted) {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Carro atualizado com sucesso!')),
+              const SnackBar(content: Text('Car updated successfully!')),
             );
           }
         }
@@ -79,7 +79,7 @@ class _AddCarScreenState extends State<AddCarScreen> {
       } catch (e) {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Erro ao salvar: $e')),
+            SnackBar(content: Text('Error saving: $e')),
           );
         }
       } finally {
@@ -96,7 +96,7 @@ class _AddCarScreenState extends State<AddCarScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.car == null ? 'Adicionar Carro' : 'Editar Carro'),
+        title: Text(widget.car == null ? 'Add Car' : 'Edit Car'),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
@@ -108,14 +108,14 @@ class _AddCarScreenState extends State<AddCarScreen> {
               TextFormField(
                 controller: _nicknameController,
                 decoration: const InputDecoration(
-                  labelText: 'Apelido do Carro',
-                  hintText: 'Ex: Meu Carro, Carro da Família',
+                  labelText: 'Car Nickname',
+                  hintText: 'Ex: My Car, Family Car',
                   border: OutlineInputBorder(),
                   prefixIcon: Icon(Icons.label),
                 ),
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
-                    return 'Por favor, insira um apelido para o carro';
+                    return 'Please enter a nickname for the car';
                   }
                   return null;
                 },
@@ -124,14 +124,14 @@ class _AddCarScreenState extends State<AddCarScreen> {
               TextFormField(
                 controller: _manufacturerController,
                 decoration: const InputDecoration(
-                  labelText: 'Fabricante',
+                  labelText: 'Manufacturer',
                   hintText: 'Ex: Toyota, Volkswagen, Ford',
                   border: OutlineInputBorder(),
                   prefixIcon: Icon(Icons.business),
                 ),
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
-                    return 'Por favor, insira o fabricante';
+                    return 'Please enter the manufacturer';
                   }
                   return null;
                 },
@@ -140,14 +140,14 @@ class _AddCarScreenState extends State<AddCarScreen> {
               TextFormField(
                 controller: _modelController,
                 decoration: const InputDecoration(
-                  labelText: 'Modelo',
+                  labelText: 'Model',
                   hintText: 'Ex: Corolla, Gol, Fiesta',
                   border: OutlineInputBorder(),
                   prefixIcon: Icon(Icons.directions_car),
                 ),
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
-                    return 'Por favor, insira o modelo';
+                    return 'Please enter the model';
                   }
                   return null;
                 },
@@ -156,7 +156,7 @@ class _AddCarScreenState extends State<AddCarScreen> {
               TextFormField(
                 controller: _yearController,
                 decoration: const InputDecoration(
-                  labelText: 'Ano',
+                  labelText: 'Year',
                   hintText: 'Ex: 2020',
                   border: OutlineInputBorder(),
                   prefixIcon: Icon(Icons.calendar_today),
@@ -164,14 +164,14 @@ class _AddCarScreenState extends State<AddCarScreen> {
                 keyboardType: TextInputType.number,
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
-                    return 'Por favor, insira o ano';
+                    return 'Please enter the year';
                   }
                   final year = int.tryParse(value.trim());
                   if (year == null) {
-                    return 'Por favor, insira um ano válido';
+                    return 'Please enter a valid year';
                   }
                   if (year < 1900 || year > DateTime.now().year + 1) {
-                    return 'Por favor, insira um ano válido';
+                    return 'Please enter a valid year';
                   }
                   return null;
                 },
@@ -189,7 +189,7 @@ class _AddCarScreenState extends State<AddCarScreen> {
                         child: CircularProgressIndicator(strokeWidth: 2),
                       )
                     : Text(
-                        widget.car == null ? 'Adicionar Carro' : 'Salvar Alterações',
+                        widget.car == null ? 'Add Car' : 'Save Changes',
                         style: const TextStyle(fontSize: 16),
                       ),
               ),
