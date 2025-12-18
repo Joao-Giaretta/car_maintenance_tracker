@@ -77,18 +77,18 @@ class _CarsListScreenState extends State<CarsListScreen> {
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
           : _cars.isEmpty
-              ? Center(
+              ? const Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Icon(Icons.directions_car, size: 80, color: Colors.grey),
-                      const SizedBox(height: 16),
-                      const Text(
+                      Icon(Icons.directions_car, size: 80, color: Colors.grey),
+                      SizedBox(height: 16),
+                      Text(
                         'Nenhum carro cadastrado',
                         style: TextStyle(fontSize: 18, color: Colors.grey),
                       ),
-                      const SizedBox(height: 8),
-                      const Text(
+                      SizedBox(height: 8),
+                      Text(
                         'Toque no botão + para adicionar um carro',
                         style: TextStyle(fontSize: 14, color: Colors.grey),
                       ),

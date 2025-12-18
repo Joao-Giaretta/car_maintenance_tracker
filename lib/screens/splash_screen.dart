@@ -71,16 +71,16 @@ class _SplashScreenState extends State<SplashScreen>
               opacity: _fadeAnimation,
               child: ScaleTransition(
                 scale: _scaleAnimation,
-                child: Column(
+                child: const Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Icon(
+                    Icon(
                       Icons.directions_car,
                       size: 100,
                       color: Colors.white,
                     ),
-                    const SizedBox(height: 24),
-                    const Text(
+                    SizedBox(height: 24),
+                    Text(
                       'Car Maintenance',
                       style: TextStyle(
                         fontSize: 32,
@@ -88,8 +88,8 @@ class _SplashScreenState extends State<SplashScreen>
                         color: Colors.white,
                       ),
                     ),
-                    const SizedBox(height: 8),
-                    const Text(
+                    SizedBox(height: 8),
+                    Text(
                       'Tracker',
                       style: TextStyle(
                         fontSize: 24,
@@ -97,8 +97,8 @@ class _SplashScreenState extends State<SplashScreen>
                         color: Colors.white70,
                       ),
                     ),
-                    const SizedBox(height: 48),
-                    const SizedBox(
+                    SizedBox(height: 48),
+                    SizedBox(
                       width: 40,
                       height: 40,
                       child: CircularProgressIndicator(

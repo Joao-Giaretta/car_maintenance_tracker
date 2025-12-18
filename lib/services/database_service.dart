@@ -15,17 +15,36 @@ class DatabaseService {
       return;
     }
     // A string de conexão NUNCA deve ficar hardcoded no código.
-    // Configure a variável de ambiente MONGODB_CONNECTION_STRING no arquivo .env
-    final connectionString = dotenv.env['MONGODB_CONNECTION_STRING'];
+    // Configure as variáveis de ambiente MONGODB_CONNECTION_STRING e DATABASE_NAME no arquivo .env
+    final baseConnectionString = dotenv.env['MONGODB_CONNECTION_STRING'];
+    final databaseName = dotenv.env['DATABASE_NAME'];
 
-    if (connectionString == null || connectionString.isEmpty) {
+    if (baseConnectionString == null || baseConnectionString.isEmpty) {
       throw Exception(
         'Variável de ambiente MONGODB_CONNECTION_STRING não configurada. '
-        'Crie o arquivo .env (baseado em .env.example) e defina a string de conexão do MongoDB.',
+        'Crie o arquivo .env (baseado em .env.example) e defina a string de conexão base do MongoDB.',
       );
     }
 
-    _db = await Db.create(connectionString);
+    // Se DATABASE_NAME estiver definido e a string base não tiver um banco específico,
+    // montamos a string final usando o nome do banco.
+    String finalConnectionString = baseConnectionString;
+    if (databaseName != null && databaseName.isNotEmpty) {
+      // Verifica se a string já contém um nome de banco (parte após o host)
+      final uriHasPath =
+          baseConnectionString.split('/').length > 3 && !baseConnectionString.endsWith('/');
+
+      if (!uriHasPath) {
+        // Adiciona o nome do banco, respeitando se já termina com '/'
+        if (baseConnectionString.endsWith('/')) {
+          finalConnectionString = '$baseConnectionString$databaseName';
+        } else {
+          finalConnectionString = '$baseConnectionString/$databaseName';
+        }
+      }
+    }
+
+    _db = await Db.create(finalConnectionString);
     await _db!.open();
     _maintenanceCollection = _db!.collection('maintenance_records');
     _carsCollection = _db!.collection('cars');
